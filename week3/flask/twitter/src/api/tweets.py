@@ -1,5 +1,3 @@
-
-
 from flask import Blueprint, jsonify, abort, request
 from ..models import Tweet, User, db
 
@@ -52,3 +50,11 @@ def delete(id: int):
     except:
         # something went wrong :(
         return jsonify(False)
+        
+@bp.route('/<int:id>/liking_users', methods=['GET'])
+def liking_users(id: int):
+    t = Tweet.query.get_or_404(id)
+    result = []
+    for u in t.liking_users:
+        result.append(u.serialize())
+    return jsonify(result)
