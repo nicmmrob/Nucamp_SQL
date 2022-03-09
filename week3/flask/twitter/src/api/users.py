@@ -19,7 +19,7 @@ def index():
     result = []
     for u in users:
         result.append(u.serialize())  # build list of Tweets as dictionaries
-    return jsonify(result)
+        return jsonify(result)
 
 
 @bp.route('/<int:id>', methods=['GET'])
@@ -30,14 +30,13 @@ def show(id: int):
 
 @bp.route('', methods=['POST'])
 def create():
-    # req body must contain user_id and content
+    # req body must contain username and password
     if 'username' not in request.json or 'password' not in request.json:
         return abort(400)
 
     if len(request.json['username']) < 3 or len(request.json['password']) < 8:
         return abort(400)
 
-    # construct Tweet
     u = User(
         username=request.json['username'],
         password=scramble(request.json['password'])
