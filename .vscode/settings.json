@@ -10,5 +10,7 @@
     "search.exclude": {
         "venv/**": true,
         "data/**": true
-    }
+    },
+    "editor.wordWrap": "on",
+    "jupyter.themeMatplotlibPlots": true
 }
